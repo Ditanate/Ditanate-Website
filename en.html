@@ -30,7 +30,7 @@
             font-size: 0.8rem;
         }
         .lang-switcher a {
-            color: var(--text-gray);
+            color: var(--text-gray); /* Теперь все ссылки будут этого цвета */
             text-decoration: none;
             margin: 0 10px;
             transition: 0.3s;
@@ -110,8 +110,7 @@
 
     <div class="lang-switcher">
         <a href="https://ditanate.pro/ru">RU</a>
-        <a href="https://ditanate.pro/en" style="color: var(--white); font-weight: bold;">EN</a>
-        <a href="https://ditanate.pro/it">IT</a>
+        <a href="https://ditanate.pro/en">EN</a> <a href="https://ditanate.pro/it">IT</a>
     </div>
 
     <header>
@@ -128,10 +127,10 @@
     <div class="container">
         
         <div class="section-box">
-            <h2 style="color: #f1c40f;">MINECRAFT SERVER</h2>
-            <p>A unique gaming experience at <b>play.ditanate.pro</b>. <br> 
-            Join our Discord community to get the latest news and participate in server life.</p>
-            <a href="https://discord.gg/3qbzMVrz28" class="btn-action" style="background: #27ae60;">Join Discord</a>
+            <h2 style="color: #f1c40f; text-transform: uppercase;">MINECRAFT SERVER</h2>
+            <p>A unique gaming experience on the <b>Ditanate</b> server in Minecraft.<br> 
+            Join our community and enjoy the game!</p>
+            <a href="https://play.ditanate.pro" class="btn-action" style="background: #27ae60;">Learn More</a>
         </div>
 
         <div class="section-box">
@@ -159,5 +158,4 @@
     </footer>
 
 </body>
-
 </html>
