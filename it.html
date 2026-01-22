@@ -11,6 +11,7 @@
             --accent-purple: #8a2be2;
             --text-gray: #a0a0a0;
             --white: #ffffff;
+            --accent-orange: #ff9d00;
         }
 
         body {
@@ -23,9 +24,33 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            position: relative;
         }
 
-        /* Selettore della lingua - in alto */
+        /* Bottone PRIVATE nell'angolo */
+        .private-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .private-btn:hover {
+            border-color: var(--accent-orange);
+            color: var(--white);
+            background: rgba(255, 157, 0, 0.1);
+        }
+
+        /* Selettore di lingua */
         .lang-switcher {
             margin-top: 20px;
             font-size: 0.8rem;
@@ -59,7 +84,7 @@
             text-transform: uppercase;
         }
 
-        /* Social Network */
+        /* Icone Social */
         .social-icons {
             margin: 20px 0;
         }
@@ -103,15 +128,24 @@
             width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .footer-links a {
-            color: var(--text-gray);
-            font-size: 0.8rem;
-            margin: 0 15px;
-            text-decoration: none;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
         }
+        .footer-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .footer-link:hover { color: #fff; }
     </style>
 </head>
 <body>
+
+    <a href="https://ditanate.pro/private" class="private-btn">Private</a>
 
     <div class="lang-switcher">
         <a href="https://ditanate.pro/ru">RU</a>
@@ -120,7 +154,7 @@
     </div>
 
     <header>
-        <span class="badge">Progetti Ditanate</span>
+        <span class="badge">Ditanate Projects</span>
         <h1>Ditanate HUB</h1>
         <p style="color: var(--text-gray)">Tutto su di me e sui miei progetti</p>
     </header>
@@ -133,22 +167,22 @@
     <div class="container">
         
         <div class="section-box">
-    <h2 style="color: #f1c40f; text-transform: uppercase;">SERVER MINECRAFT</h2>
-    <p>Un'esperienza di gioco unica sul server <b>Ditanate</b> in Minecraft.<br> 
-    Unisciti alla nostra community e goditi il gioco!</p>
-    <a href="https://play.ditanate.pro" class="btn-action" style="background: #27ae60;">Più dettagli</a>
-</div>
+            <h2 style="color: #f1c40f; text-transform: uppercase;">SERVER MINECRAFT</h2>
+            <p>Un'esperienza di gioco unica sul server <b>Ditanate</b> in Minecraft.<br> 
+            Entra nella nostra community e divertiti con noi!</p>
+            <a href="https://play.ditanate.pro" class="btn-action" style="background: #27ae60;">Scopri di più</a>
+        </div>
 
         <div class="section-box">
             <h2 style="color: #9b59b6;">RMRP | GTA 5 RP</h2>
-            <p>Gioco sul server Patriki. Vuoi giocare con me? Clicca il pulsante e segui le istruzioni.</p>
+            <p>Gioco sul server Patriki. Vuoi unirti a me? Clicca sul pulsante e segui le istruzioni.</p>
             <a href="http://rmrp.ru/p/U-GND" class="btn-action">Inizia a giocare</a>
         </div>
 
         <div class="section-box" style="font-size: 0.9rem; line-height: 1.6;">
             <h3 style="color: orange;">Breve biografia</h3>
-            Mi chiamo Ivan, amo i colori <b>nero</b> e <b>viola</b>. Nel 2025 ho 11 anni. 
-            Ho creato questo sito da solo, anche se un amico mi ha aiutato in alcuni punti. 
+            Mi chiamo Ivan e amo i colori <b>nero</b> e <b>viola</b>. Al momento (2025) ho 11 anni. 
+            Ho creato questo sito da solo, anche se un amico mi ha aiutato con alcune parti. 
             Se hai domande, scrivimi su Discord o sul mio canale Telegram.
         </div>
 
@@ -156,13 +190,12 @@
 
     <footer>
         <div class="footer-links">
-            <a href="https://ditanate.pro/privacy">Privacy Policy</a>
-            <a href="https://ditanate.pro/terms">Terms of Use</a>
-            <a href="https://ditanate.pro/cookie">Cookie Policy</a>
+            <a href="https://ditanate.pro/privacy" class="footer-link">Privacy Policy</a>
+            <a href="https://ditanate.pro/terms" class="footer-link">Terms of Use</a>
+            <a href="https://ditanate.pro/cookie" class="footer-link">Cookie Policy</a>
         </div>
-        <p style="font-size: 0.7rem; color: #444; margin-top: 15px;">&copy; 2026 Ditanate. Tutti i diritti riservati.</p>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 15px;">© 2026 Ditanate. All rights reserved.</p>
     </footer>
 
 </body>
-
 </html>
