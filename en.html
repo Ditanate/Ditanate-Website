@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ditanate HUB | EN</title>
+    <title>Ditanate HUB</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
@@ -11,6 +11,7 @@
             --accent-purple: #8a2be2;
             --text-gray: #a0a0a0;
             --white: #ffffff;
+            --accent-orange: #ff9d00;
         }
 
         body {
@@ -23,20 +24,46 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            position: relative;
         }
 
+        /* PRIVATE button in the corner */
+        .private-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .private-btn:hover {
+            border-color: var(--accent-orange);
+            color: var(--white);
+            background: rgba(255, 157, 0, 0.1);
+        }
+
+        /* Language Switcher */
         .lang-switcher {
             margin-top: 20px;
             font-size: 0.8rem;
         }
         .lang-switcher a {
-            color: var(--text-gray); /* Теперь все ссылки будут этого цвета */
+            color: var(--text-gray);
             text-decoration: none;
             margin: 0 10px;
             transition: 0.3s;
         }
         .lang-switcher a:hover { color: var(--accent-purple); }
 
+        /* Header */
         header {
             text-align: center;
             margin-top: 50px;
@@ -57,6 +84,7 @@
             text-transform: uppercase;
         }
 
+        /* Social Icons */
         .social-icons {
             margin: 20px 0;
         }
@@ -68,6 +96,7 @@
         .social-icons a:hover { transform: scale(1.1); }
         .social-icons img { width: 32px; filter: invert(1); }
 
+        /* Content Blocks */
         .container {
             max-width: 800px;
             width: 90%;
@@ -91,6 +120,7 @@
             margin-top: 15px;
         }
 
+        /* Footer */
         footer {
             margin-top: auto;
             padding: 40px 0;
@@ -98,19 +128,29 @@
             width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .footer-links a {
-            color: var(--text-gray);
-            font-size: 0.8rem;
-            margin: 0 15px;
-            text-decoration: none;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
         }
+        .footer-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .footer-link:hover { color: #fff; }
     </style>
 </head>
 <body>
 
+    <a href="https://ditanate.pro/private" class="private-btn">Private</a>
+
     <div class="lang-switcher">
         <a href="https://ditanate.pro/ru">RU</a>
-        <a href="https://ditanate.pro/en">EN</a> <a href="https://ditanate.pro/it">IT</a>
+        <a href="https://ditanate.pro/en">EN</a>
+        <a href="https://ditanate.pro/it">IT</a>
     </div>
 
     <header>
@@ -128,33 +168,33 @@
         
         <div class="section-box">
             <h2 style="color: #f1c40f; text-transform: uppercase;">MINECRAFT SERVER</h2>
-            <p>A unique gaming experience on the <b>Ditanate</b> server in Minecraft.<br> 
+            <p>Unique gaming experience on the <b>Ditanate</b> server in Minecraft.<br> 
             Join our community and enjoy the game!</p>
             <a href="https://play.ditanate.pro" class="btn-action" style="background: #27ae60;">Learn More</a>
         </div>
 
         <div class="section-box">
             <h2 style="color: #9b59b6;">RMRP | GTA 5 RP</h2>
-            <p>I play on the Patriki server. Want to play with me? Click the button and follow the instructions.</p>
+            <p>I play on the Patriki server. Want to join me? Click the button and follow the instructions.</p>
             <a href="http://rmrp.ru/p/U-GND" class="btn-action">Start Playing</a>
         </div>
 
         <div class="section-box" style="font-size: 0.9rem; line-height: 1.6;">
             <h3 style="color: orange;">Short Biography</h3>
-            My name is Ivan, I love <b>black</b> and <b>purple</b> colors. At the time of 2025, I am 11 years old. 
-            I created this site myself, although a friend helped me with some parts. 
-            If you have questions, message me in Discord or my Telegram channel.
+            My name is Ivan, and I love <b>black</b> and <b>purple</b> colors. As of 2025, I am 11 years old. 
+            I created this website myself, although a friend helped me with a few parts. 
+            If you have any questions, feel free to message me on Discord or through my Telegram channel.
         </div>
 
     </div>
 
     <footer>
         <div class="footer-links">
-            <a href="https://ditanate.pro/privacy">Privacy Policy</a>
-            <a href="https://ditanate.pro/terms">Terms of Use</a>
-            <a href="https://ditanate.pro/cookie">Cookie Policy</a>
+            <a href="https://ditanate.pro/privacy" class="footer-link">Privacy Policy</a>
+            <a href="https://ditanate.pro/terms" class="footer-link">Terms of Use</a>
+            <a href="https://ditanate.pro/cookie" class="footer-link">Cookie Policy</a>
         </div>
-        <p style="font-size: 0.7rem; color: #444; margin-top: 15px;">&copy; 2026 Ditanate. All rights reserved.</p>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 15px;">© 2026 Ditanate. All rights reserved.</p>
     </footer>
 
 </body>
