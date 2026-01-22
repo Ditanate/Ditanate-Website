@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Access | Ditanate</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --accent: #ff9d00;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f13 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .back-hub {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .back-hub:hover { color: var(--accent); }
+
+        .login-card {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+        p { color: #666; font-size: 0.9rem; margin-bottom: 30px; }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        input:focus { border-color: var(--accent); outline: none; }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,157,0,0.3); }
+
+        .footer-note { font-size: 0.7rem; color: #444; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <a href="https://ditanate.pro" class="back-hub">← Вернуться в HUB</a>
+
+    <div class="login-card">
+        <h1>DITANATE PRIVATE</h1>
+        <p>Доступ только для авторизованных лиц</p>
+        
+        <form action="check_auth.php" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="login-btn">Войти в систему</button>
+        </form>
+
+        <div class="footer-note">
+            Если у вас нет данных для входа, свяжитесь с Ditanate.<br>
+            © 2026 Ditanate. Protected area. All rights reserved.
+        </div>
+    </div>
+
+</body>
+</html>
