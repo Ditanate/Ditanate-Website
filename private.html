@@ -133,7 +133,7 @@
         <div id="msgs">Загрузка сообщений...</div>
         
         <div style="display:flex; gap: 10px;">
-            <input type="text" id="msg-text" placeholder="Введите сообщение..." style="margin:0">
+            <input type="text" id="msg-text" placeholder="Сообщение..." style="margin:0">
             <button onclick="send()" class="btn" style="width: 80px; margin:0;">→</button>
         </div>
         <button onclick="location.reload()" style="background:none; border:none; color:#444; cursor:pointer; margin-top:10px; font-size:10px;">Выйти</button>
@@ -185,7 +185,7 @@
                     genErr.style.display = 'block';
                 }
             } catch (e) {
-                genErr.innerText = "Ошибка подключения к базе";
+                genErr.innerText = "Ошибка подключения к базе!";
                 genErr.style.display = 'block';
             }
         }
@@ -216,3 +216,4 @@
     </script>
 </body>
 </html>
+
