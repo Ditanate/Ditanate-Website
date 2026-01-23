@@ -22,7 +22,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden; /* Чтобы контекстное меню не вызывало скролл */
+            overflow: hidden;
         }
 
         .back-hub {
@@ -32,25 +32,29 @@
         .back-hub:hover { color: var(--accent); }
 
         .login-card, .chat-card {
-            background: var(--glass); padding: 40px; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05); text-align: center;
-            width: 100%; max-width: 400px; backdrop-filter: blur(10px);
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
         }
 
-        .chat-card { display: none; max-width: 700px; height: 85vh; flex-direction: column; position: relative; }
+        .chat-card { display: none; max-width: 600px; height: 80vh; flex-direction: column; }
         
-        /* Панель закрепа */
         #pin-panel {
             background: rgba(255, 157, 0, 0.1); border-left: 4px solid var(--accent);
             padding: 10px; margin-bottom: 10px; text-align: left; display: none;
             font-size: 0.85rem; cursor: pointer;
         }
 
-        #msgs { flex: 1; overflow-y: auto; text-align: left; margin: 10px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; }
+        #msgs { flex: 1; overflow-y: auto; text-align: left; margin: 20px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px; }
         
-        .msg { margin-bottom: 10px; font-size: 0.9rem; padding: 5px; border-radius: 5px; transition: background 0.2s; }
-        .msg:hover { background: rgba(255,255,255,0.05); }
+        .msg { margin-bottom: 10px; font-size: 0.9rem; }
         .msg b { color: var(--accent); cursor: pointer; }
+        .console-msg { color: #55ff55; font-style: italic; }
 
         h1 { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
         p { color: #666; font-size: 0.9rem; margin-bottom: 30px; }
@@ -72,34 +76,16 @@
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,157,0,0.3); }
 
-        /* НОВАЯ КНОПКА ВЫХОДА */
-        .logout-btn {
-            width: 100%; padding: 15px; margin-top: 15px;
-            background: transparent; border: 2px solid #333; color: #666;
-            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-            border-radius: 10px; cursor: pointer; transition: all 0.4s ease;
-        }
-        .logout-btn:hover {
-            border-color: var(--error); color: var(--error);
-            box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
-            text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
-        }
+        .footer-note { font-size: 0.7rem; color: #444; margin-top: 20px; }
 
-        /* КОНТЕКСТНОЕ МЕНЮ */
         #context-menu {
             position: fixed; display: none; background: #15151e; border: 1px solid #333;
-            border-radius: 8px; z-index: 1000; width: 200px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); overflow: hidden;
+            border-radius: 8px; z-index: 1000; width: 180px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        .ctx-item {
-            padding: 12px 20px; cursor: pointer; font-size: 0.9rem;
-            color: #ddd; transition: 0.2s; text-align: left; display: flex; justify-content: space-between;
-        }
+        .ctx-item { padding: 10px 15px; cursor: pointer; font-size: 0.85rem; color: #ddd; }
         .ctx-item:hover { background: var(--accent); color: #000; }
-        .ctx-divider { height: 1px; background: #333; margin: 0; }
         .ctx-red:hover { background: var(--error); color: white; }
-
-        .footer-note { font-size: 0.7rem; color: #444; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -109,23 +95,18 @@
     <div id="login-box" class="login-card">
         <h1>DITANATE PRIVATE</h1>
         <p>Доступ только для авторизованных лиц</p>
-        
         <form onsubmit="event.preventDefault(); login();">
             <div class="input-group">
-                <input type="text" id="user" name="username" placeholder="Username" autocomplete="username">
+                <input type="text" id="user" name="username" placeholder="Username" autocomplete="username" oninput="hideErr('user-error')">
                 <div id="user-error" class="error-text">Введите имя пользователя</div>
             </div>
-
             <div class="input-group">
-                <input type="password" id="pass" name="password" placeholder="Password" autocomplete="current-password">
+                <input type="password" id="pass" name="password" placeholder="Password" autocomplete="current-password" oninput="hideErr('pass-error')">
                 <div id="pass-error" class="error-text">Введите пароль</div>
             </div>
-
             <button type="submit" class="btn">Войти в аккаунт</button>
         </form>
-
         <div id="general-error" class="error-text" style="text-align:center; margin-top:10px;"></div>
-
         <div class="footer-note">
             Если у вас нет данных для входа, свяжитесь с Ditanate.<br>
             © 2026 Ditanate. Protected area. All rights reserved.
@@ -134,27 +115,26 @@
 
     <div id="chat-box" class="chat-card">
         <h1>PRIVATE CHAT</h1>
-        
         <div id="pin-panel" onclick="unpinMsg()">
-            <div style="font-weight:bold; color:var(--accent)">📌 Закреплённое сообщение</div>
-            <div id="pin-content" style="color:#ddd; margin-top:2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">...</div>
+            <div style="font-weight:bold; color:var(--accent)">📌 Закреплено</div>
+            <div id="pin-content" style="color:#ddd; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">...</div>
         </div>
-
         <div id="msgs">Загрузка сообщений...</div>
-        
-        <div style="display:flex; gap: 10px;">
-            <input type="text" id="msg-text" placeholder="Сообщение..." onkeydown="checkEnter(event)">
-            <button onclick="send()" class="btn" style="width: 80px; margin:0;">→</button>
+        <div>
+            <div style="display:flex; gap: 10px;">
+                <input type="text" id="msg-text" placeholder="Сообщение..." onkeydown="if(event.key==='Enter') send()">
+                <button onclick="send()" class="btn" style="width: 80px; margin:0;">→</button>
+            </div>
+            <div id="empty-err" class="error-text" style="text-align:left;">Вы пытаетесь отправить пустое сообщение!</div>
         </div>
-        
-        <button onclick="logout()" class="logout-btn">Выйти из аккаунта</button>
+        <button onclick="logout()" style="background:none; border:none; color:#444; cursor:pointer; margin-top:10px; font-size:10px;">Выйти из аккаунта</button>
     </div>
 
     <div id="context-menu">
         <div class="ctx-item" onclick="replyMsg()">↩ Ответить</div>
         <div class="ctx-item" onclick="copyMsg()">📋 Копировать</div>
         <div id="admin-tools" style="display:none">
-            <div class="ctx-divider"></div>
+            <div style="height:1px; background:#333;"></div>
             <div class="ctx-item" onclick="pinMsg()">📌 Закрепить</div>
             <div class="ctx-item ctx-red" onclick="deleteMsg()">🗑 Удалить</div>
         </div>
@@ -162,59 +142,38 @@
 
     <script>
         const SS_URL = "https://script.google.com/macros/s/AKfycbyxh_BST2b-gX5ANLXYo7nPGrAH6xWB-uXmZjWPaMId0CCrTWmV7GTOWsXeuKkVvNTV/exec";
-        
-        // Звук уведомления
         const notifSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3'); 
 
         let currentUser = localStorage.getItem('ditanate_user');
         let isAdmin = localStorage.getItem('ditanate_role') === 'admin';
-        
-        // Данные для контекстного меню
-        let selectedMsgText = "";
-        let selectedMsgAuthor = "";
-        let selectedMsgId = -1;
+        let selText, selAuthor, selId;
 
-        // Авто-вход
-        if(currentUser) {
-            initChat();
-        }
+        if(currentUser) initChat();
+
+        function hideErr(id) { document.getElementById(id).style.display = 'none'; }
 
         async function login() {
-            const userInp = document.getElementById('user');
-            const passInp = document.getElementById('pass');
-            const genErr = document.getElementById('general-error');
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            const uErr = document.getElementById('user-error');
+            const pErr = document.getElementById('pass-error');
+            const gErr = document.getElementById('general-error');
 
-            genErr.style.display = 'none';
+            let hasError = false;
+            if(!u) { uErr.style.display = 'block'; hasError = true; }
+            if(!p) { pErr.style.display = 'block'; hasError = true; }
+            if(hasError) return;
 
-            if(!userInp.value || !passInp.value) return;
-
-            try {
-                // Имитация проверки админа на фронте (в реальности проверяет сервер)
-                // Если ты входишь как Ditanate - ты сразу Админ
-                const isLocalAdmin = userInp.value.toLowerCase() === 'ditanate';
-
-                const response = await fetch(SS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({type: "login", user: userInp.value, pass: passInp.value})
-                });
-                const data = await response.json();
-
-                if (data.res === "ok") {
-                    currentUser = userInp.value;
-                    isAdmin = isLocalAdmin; // Или data.role если сервер вернет
-                    
-                    // Сохраняем в Cookie (LocalStorage)
-                    localStorage.setItem('ditanate_user', currentUser);
-                    if(isAdmin) localStorage.setItem('ditanate_role', 'admin');
-
-                    initChat();
-                } else {
-                    genErr.innerText = "Неверный логин или пароль!";
-                    genErr.style.display = 'block';
-                }
-            } catch (e) {
-                genErr.innerText = "Ошибка сети!";
-                genErr.style.display = 'block';
+            gErr.style.display = 'none';
+            const response = await fetch(SS_URL, {method: 'POST', body: JSON.stringify({type: "login", user: u, pass: p})});
+            const data = await response.json();
+            if (data.res === "ok") {
+                localStorage.setItem('ditanate_user', u);
+                if(u.toLowerCase() === 'ditanate') localStorage.setItem('ditanate_role', 'admin');
+                location.reload();
+            } else {
+                gErr.innerText = "Неверные данные!";
+                gErr.style.display = 'block';
             }
         }
 
@@ -227,112 +186,56 @@
         }
 
         function logout() {
-            localStorage.clear();
-            location.reload();
-        }
-
-        function checkEnter(e) {
-            if(e.key === "Enter") send();
+            if(confirm("Вы действительно хотите выйти из аккаунта?")) {
+                localStorage.clear();
+                location.reload();
+            }
         }
 
         async function send() {
-            const input = document.getElementById('msg-text');
-            const text = input.value.trim();
-            if(!text) return;
-
-            // Логика MUTE
-            if(text.startsWith('/mute')) {
-                if(!isAdmin) { alert("Недостаточно прав!"); return; }
-                // Отправляем команду на сервер (сервер должен ее обработать)
-                input.value = "Выполнение команды...";
-            } else {
-                input.value = "Отправка...";
-            }
+            const inp = document.getElementById('msg-text');
+            const err = document.getElementById('empty-err');
+            let txt = inp.value.trim();
+            if(!txt) { err.style.display='block'; setTimeout(()=>err.style.display='none', 2000); return; }
             
-            await fetch(SS_URL, {
-                method: 'POST',
-                body: JSON.stringify({type: "send", user: currentUser, text: text})
-            });
-            input.value = "";
-            loadMessages();
+            if(txt.startsWith('/') && isAdmin) {
+                const p = txt.split(' ');
+                txt = `CONSOLE: Выполнено! [${p[1]}] Наказан (${p[0].slice(1)}) на ${p[2]||'1'} ч.`;
+            }
+
+            inp.value = "Отправка...";
+            await fetch(SS_URL, {method: 'POST', body: JSON.stringify({type: "send", user: currentUser, text: txt})});
+            inp.value = ""; loadMessages();
         }
 
         async function loadMessages() {
             const res = await fetch(SS_URL);
             const data = await res.json();
             const box = document.getElementById('msgs');
-            
-            // Рендерим сообщения с поддержкой ПКМ (contextmenu)
-            box.innerHTML = data.map((m, idx) => `
-                <div class="msg" oncontextmenu="openCtxMenu(event, '${m[1]}', '${m[0]}', ${idx})">
-                    <b>${m[0]}:</b> ${m[1]} 
-                    <i style="font-size:10px; color:#444; margin-left:5px">${new Date(m[2]).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</i>
-                </div>
-            `).join('');
-            
-            // Автоскролл только если мы внизу
-            // box.scrollTop = box.scrollHeight; 
+            box.innerHTML = data.map((m, idx) => {
+                if(m[1].includes(`@${currentUser}`)) {
+                    if(!window.lM || window.lM !== m[2]) { notifSound.play(); window.lM = m[2]; }
+                }
+                const isC = m[1].startsWith('CONSOLE:');
+                return `<div class="msg ${isC?'console-msg':''}" oncontextmenu="openCtxMenu(event, '${m[1]}', '${m[0]}', ${idx})">
+                    <b>${m[0]}:</b> ${m[1]} <i style="font-size:9px; color:#444">${new Date(m[2]).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'})}</i>
+                </div>`;
+            }).join('');
         }
 
-        // --- CONTEXT MENU LOGIC ---
-        function openCtxMenu(e, text, author, id) {
-            e.preventDefault();
-            selectedMsgText = text;
-            selectedMsgAuthor = author;
-            selectedMsgId = id;
-
+        function openCtxMenu(e, t, a, id) {
+            e.preventDefault(); selText=t; selAuthor=a; selId=id;
             const menu = document.getElementById('context-menu');
-            menu.style.display = 'block';
-            menu.style.left = e.pageX + 'px';
-            menu.style.top = e.pageY + 'px';
+            document.getElementById('admin-tools').style.display = (isAdmin || a === currentUser) ? 'block' : 'none';
+            menu.style.display = 'block'; menu.style.left = e.pageX + 'px'; menu.style.top = e.pageY + 'px';
         }
 
-        // Закрыть меню при клике в любом месте
-        document.addEventListener('click', () => {
-            document.getElementById('context-menu').style.display = 'none';
-        });
-
-        function copyMsg() {
-            navigator.clipboard.writeText(selectedMsgText);
-        }
-
-        function replyMsg() {
-            const inp = document.getElementById('msg-text');
-            inp.value = `@${selectedMsgAuthor}, ` + inp.value;
-            inp.focus();
-            notifSound.volume = 0.5;
-            notifSound.play().catch(e => console.log('Audio error', e));
-        }
-
-        function pinMsg() {
-            if(!isAdmin) return;
-            document.getElementById('pin-panel').style.display = 'block';
-            document.getElementById('pin-content').innerText = `${selectedMsgAuthor}: ${selectedMsgText}`;
-            // В идеале тут нужен fetch на сервер чтобы сохранить закреп
-        }
-        
-        function unpinMsg() {
-            if(isAdmin && confirm("Открепить сообщение?")) {
-                document.getElementById('pin-panel').style.display = 'none';
-            }
-        }
-
-        function deleteMsg() {
-            if(!isAdmin) return;
-            if(confirm("Удалить это сообщение у всех?")) {
-                // Отправляем запрос на удаление
-                fetch(SS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({type: "delete", user: currentUser, id: selectedMsgId})
-                }).then(() => {
-                    loadMessages();
-                    alert("Запрос на удаление отправлен.");
-                });
-            }
-        }
+        document.addEventListener('click', () => document.getElementById('context-menu').style.display = 'none');
+        function copyMsg() { navigator.clipboard.writeText(selText); }
+        function replyMsg() { document.getElementById('msg-text').value = `@${selAuthor}, `; document.getElementById('msg-text').focus(); }
+        function pinMsg() { if(!isAdmin) return; document.getElementById('pin-panel').style.display = 'block'; document.getElementById('pin-content').innerText = `${selAuthor}: ${selText}`; }
+        function unpinMsg() { if(isAdmin && confirm("Открепить?")) document.getElementById('pin-panel').style.display = 'none'; }
+        async function deleteMsg() { if(confirm("Удалить?")) { await fetch(SS_URL, {method: 'POST', body: JSON.stringify({type: "delete", id: selId})}); loadMessages(); } }
     </script>
 </body>
 </html>
-
-
-
